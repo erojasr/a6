@@ -2,22 +2,41 @@
   <div class="card-content">
     <span class="card-title">Nuevo Curso</span>
 
-    <form action="" class="col s6">
+    <form (ngSubmit)="onGuardarCurso(formNew)" #formNew="ngForm" class="col s6">
       <div class="row">
         <div class="input-field col s6">
-          <input type="text" name="nombre" id="nombre" placeholder="Nombre Curso">
+          <input [(ngModel)]="curso.nombre" #nombre="ngModel" type="text" name="nombre" id="nombre" placeholder="Nombre Curso">
           <label for="">Nombre</label>
         </div>
 
         <div class="input-field col s6">
-            <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion Curso">
+            <input [(ngModel)]="curso.descripcion" #descripcion="ngModel" type="text" name="descripcion" id="descripcion" placeholder="Descripcion Curso">
             <label for="">Descripcion</label>
         </div>
 
         <div class="input-field col s6">
-            <input type="text" name="formador" id="formador" placeholder="Formador Curso">
+            <input [(ngModel)]="curso.formador" #formador="ngModel" type="text" name="formador" id="formador" placeholder="Formador Curso">
             <label for="">Formador</label>
         </div>
+
+        <div class="input-field col s6">
+          <input [(ngModel)]="curso.precio" #precio="ngModel" type="text" name="precio" id="precio" placeholder="Precio Curso">
+          <label for="">Precio</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input [(ngModel)]="curso.idioma" #idioma="ngModel" type="text" name="idioma" id="idioma" placeholder="Idioma Curso">
+          <label for="">idioma</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input [(ngModel)]="curso.tecnologia" #tecnologia="ngModel" type="text" name="tecnologia" id="tecnologia" placeholder="Tecnologia Curso">
+          <label for="">tecnologia</label>
+        </div>
+
+        <button type="submit" class="btn waves-effect waves-light orange right">Guardar
+          <i class="material-icons">add_circle</i>
+        </button>
 
       </div>
     </form>

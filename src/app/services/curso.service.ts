@@ -14,11 +14,32 @@ export class CursoService {
   cursoDoc: AngularFirestoreDocument<CursoInterface>;
 
   constructor(public afs: AngularFirestore) { 
-    this.cursos = afs.collection('cursos').valueChanges();
+    //this.cursos = afs.collection('cursos').valueChanges();
+    this.cursosCollection = afs.collection<CursoInterface>('cursos');
+    this.cursos = this.cursosCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as CursoInterface;
+        const id = a.payload.doc.id;
+        return {id, ...data}
+      }))
+    )
   }
 
   getCursos(){
     return this.cursos;
+  }
+
+  addCurso(curso: CursoInterface){
+    console.log('NEW COURSE');
+    this.cursosCollection.add(curso);
+  }
+
+  deleteCurso(){
+    console.log('DELTE CURSO');
+  }
+
+  updateCurso(){
+    console.log('UPDATE CURSO')
   }
 
 }
