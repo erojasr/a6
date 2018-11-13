@@ -1,36 +1,79 @@
-<div>
+<div *ngIf="cursos ?.length > 0;else noCursos">
 
-  <ul class="collection">
+  <ul *ngFor="let curso of cursos" class="collection">
     <li class="collection-item">
-      <a href="" class="secondary-content">
-        <i class="material-icons">mode_edit</i>
-        <i class="material-icons">close</i>
+      <a href="#" class="secondary-content">
+        <i *ngIf="editState == false" (click)="editCurso($event, curso)" class="material-icons">mode_edit</i>
+        <i *ngIf="editState && cursoToEdit.id == curso.id" (click)="clearState()" class="material-icons">close</i>
       </a>
-      <strong>NOMBRE CURSO</strong>
+      <h4>{{curso.nombre}}</h4>
       <br>
-      <blockquote>Descripcion Curso</blockquote>
+      <blockquote>{{curso.descripcion}}</blockquote>
       <br>
       <span class="my_tag amber">
-        <strong>Precio:</strong>11,77$
+        <strong>Precio:</strong>{{curso.precio}}
       </span>
 
       <span class="my_tag amber">
-        <strong>Idioma:</strong>Ingles
+        <strong>Idioma:</strong>{{curso.idioma}}
       </span>
 
       <span class="my_tag amber">
-        <strong>Formador:</strong>Persona X
+        <strong>Formador:</strong>{{curso.formador}}
       </span>
 
       <span class="my_tag amber">
-        <strong>PHP</strong>
+        <strong>{{curso.tecnologia}}</strong>
       </span>
       <hr>
-      <div class="container-updateCurso">
-        <!-- TODO: formulario -->
+      <div *ngIf="editState && cursoToEdit.id == curso.id" class="container-updateCurso">
+        
+        <form (ngSubmit)="onUpdateCurso(curso)" #formNew="ngForm" class="col s6">
+          <div class="row">
+            <div class="input-field col s6">
+              <input [(ngModel)]="curso.nombre" #nombre="ngModel" type="text" name="nombre" id="nombre" placeholder="Nombre Curso">
+              <label for="">Nombre</label>
+            </div>
+    
+            <div class="input-field col s6">
+                <input [(ngModel)]="curso.descripcion" #descripcion="ngModel" type="text" name="descripcion" id="descripcion" placeholder="Descripcion Curso">
+                <label for="">Descripcion</label>
+            </div>
+    
+            <div class="input-field col s6">
+                <input [(ngModel)]="curso.formador" #formador="ngModel" type="text" name="formador" id="formador" placeholder="Formador Curso">
+                <label for="">Formador</label>
+            </div>
+    
+            <div class="input-field col s6">
+              <input [(ngModel)]="curso.precio" #precio="ngModel" type="text" name="precio" id="precio" placeholder="Precio Curso">
+              <label for="">Precio</label>
+            </div>
+    
+            <div class="input-field col s6">
+              <input [(ngModel)]="curso.idioma" #idioma="ngModel" type="text" name="idioma" id="idioma" placeholder="Idioma Curso">
+              <label for="">idioma</label>
+            </div>
+    
+            <div class="input-field col s6">
+              <input [(ngModel)]="curso.tecnologia" #tecnologia="ngModel" type="text" name="tecnologia" id="tecnologia" placeholder="Tecnologia Curso">
+              <label for="">tecnologia</label>
+            </div>
+    
+            <button (click)="deleteCurso($event, curso)" class="btn red right">Eliminar <i class="material-icons">delete_forever</i></button>
+            <button type="submit" class="btn orange">Actualizar <i class="material-icons">save</i></button>
+    
+          </div>
+        </form>
+
       </div>
 
     </li>
   </ul>
 
 </div>
+
+<ng-template #noCursos>
+  <hr>
+  <h5>No existen cursos</h5>
+</ng-template>

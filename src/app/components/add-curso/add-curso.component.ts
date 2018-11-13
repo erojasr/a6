@@ -13,10 +13,10 @@ export class AddCursoComponent implements OnInit {
   curso: CursoInterface = {
     nombre: '',
     formador:'',
-    precio:'',
+    precio:0,
     idioma:'',
     tecnologia:'',
-    fecha:'',
+    fecha:new Date(),
     descripcion:''
   };
 
