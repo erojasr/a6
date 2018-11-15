@@ -2,7 +2,7 @@
 
   <ul *ngFor="let curso of cursos" class="collection">
     <li class="collection-item">
-      <a href="#" class="secondary-content">
+      <a href="javascript:void(0);" class="secondary-content">
         <i *ngIf="editState == false" (click)="editCurso($event, curso)" class="material-icons">mode_edit</i>
         <i *ngIf="editState && cursoToEdit.id == curso.id" (click)="clearState()" class="material-icons">close</i>
       </a>
